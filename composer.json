@@ -1,5 +1,5 @@
 {
-  "name": "magento/sample-module-payment-provider",
+  "name": "uchenic/magento2-module-payment-tmrobokassa",
   "description": "Demonstrate Payment provider",
   "type": "magento2-module",
   "version": "1.0.0",
@@ -18,7 +18,7 @@
     "map": [
       [
         "*",
-        "Magento/SamplePaymentProvider"
+        "Magento/TMRobokassa"
       ]
     ]
   }

@@ -6,10 +6,10 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
-    <virtualType name="Magento\SamplePaymentProvider\Block\Form\Payinstore" type="Magento\Payment\Block\Form" shared="false">
+    <virtualType name="Magento\TMRobokassa\Block\Form\TMRobokassa" type="Magento\Payment\Block\Form" shared="false">
         <arguments>
             <argument name="data" xsi:type="array">
-                <item name="template" xsi:type="string">Magento_SamplePaymentProvider::form/payinstore.phtml</item>
+                <item name="template" xsi:type="string">Magento_TMRobokassa::form/tmrobokassa.phtml</item>
             </argument>
         </arguments>
     </virtualType>
