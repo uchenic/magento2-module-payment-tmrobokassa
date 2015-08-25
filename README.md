@@ -1,12 +1,3 @@
-## Synopsis
-
-An extension to add Payment method.
-This payment method can be restricted to work only with specific Shipping method.
-
-## Motivation
-
-This is one of a collection of examples to demonstrate the features of Magento 2.  The intent of this sample is to demonstrate how to create own Payment extension
-
 ## Technical feature
 
 [system.xml](etc/adminhtml/system.xml) makes our module configurable in the admin panel.
@@ -22,14 +13,6 @@ STORES -> Configuration -> ADVANCED/Advanced ->  Disable Modules Output
 
 Once there check that the module name shows up in the list to confirm that it was installed correctly.
 
-## Tests
-
-Unit tests could be found in the [Test/Unit](Test/Unit) directory.
-
-## Contributors
-
-Magento Core team
-
-## License
-
-[Open Source License](LICENSE.txt)
+TODO: add webapi.xml
+TODO: add persistence layer
+TODO: review config file
