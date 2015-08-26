@@ -3,7 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\SamplePaymentProvider\Model;
+namespace Magento\TMRobokassa\Model;
 
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Payment\Model\Method\AbstractMethod;
@@ -12,7 +12,7 @@ use Magento\Payment\Model\Method\AbstractMethod;
 /**
  * Pay In Store payment method model
  */
-class Payinstore extends AbstractMethod
+class TMRobokassa extends AbstractMethod
 {
     /**
      * @var bool
@@ -24,7 +24,7 @@ class Payinstore extends AbstractMethod
      *
      * @var string
      */
-    protected $_code = 'payinstore';
+    protected $_code = 'tmrobokassa';
 
     /**
      * Availability option
@@ -38,7 +38,7 @@ class Payinstore extends AbstractMethod
      *
      * @var string
      */
-    protected $_formBlockType = 'Magento\SamplePaymentProvider\Block\Form\Payinstore';
+    protected $_formBlockType = 'Magento\TMRobokassa\Block\Form\Payinstore';
 
     /**
      * Sidebar payment info block
