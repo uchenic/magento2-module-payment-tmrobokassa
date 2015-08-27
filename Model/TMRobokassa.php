@@ -38,7 +38,7 @@ class TMRobokassa extends AbstractMethod
      *
      * @var string
      */
-    protected $_formBlockType = 'Magento\TMRobokassa\Block\Form\Payinstore';
+    protected $_formBlockType = 'Magento\TMRobokassa\Block\Form\TMRobokassaForm';
 
     /**
      * Sidebar payment info block
