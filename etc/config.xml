@@ -12,7 +12,7 @@
                 <active>1</active>
                 <title>Pay in Store</title>
                 <order_status>pending_payment</order_status>
-                <instructions>Bring your ID, credit card and order number to the store to pick up your items.</instructions>
+                <instructions>Pay via robokassa aggregator.</instructions>
                 <payment_action>true</payment_action>
                 <model>Magento\TMRobokassa\Model\TMRobokassa</model>
                 <group>offline</group>
