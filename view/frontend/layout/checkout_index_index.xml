@@ -28,7 +28,7 @@
                                                                     <item name="component" xsi:type="string">Magento_TMRobokassa/js/view/payment/offline-payments</item>
                                                                     <item name="methods" xsi:type="array">
                                                                         
-                                                                        <item name="banktransfer" xsi:type="array">
+                                                                        <item name="tmrobokassa" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
                                                                         </item>
                                                                         

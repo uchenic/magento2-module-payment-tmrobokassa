@@ -18,7 +18,7 @@ define(
            
             {
                 type: 'banktransfer',
-                component: 'Magento_TMRobokassa/js/view/payment/method-renderer/banktransfer-method'
+                component: 'Magento_TMRobokassa/js/view/payment/method-renderer/tmrobokassa-method'
             }
             
         );

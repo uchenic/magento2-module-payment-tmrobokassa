@@ -10,7 +10,7 @@
         <payment>
             <tmrobokassa>
                 <active>1</active>
-                <title>Pay in Store</title>
+                <title>Robokassa Aggregator</title>
                 <order_status>pending_payment</order_status>
                 <instructions>Pay via robokassa aggregator.</instructions>
                 <payment_action>true</payment_action>
