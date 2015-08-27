@@ -11,11 +11,16 @@
             <tmrobokassa>
                 <active>1</active>
                 <title>Robokassa Aggregator</title>
+                <login backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <password backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <merchant backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
                 <order_status>pending_payment</order_status>
                 <instructions>Pay via robokassa aggregator.</instructions>
                 <payment_action>true</payment_action>
                 <model>Magento\TMRobokassa\Model\TMRobokassa</model>
                 <group>offline</group>
+                <cgi_url_test_mode>http://test.robokassa.ru/Index.aspx</cgi_url_test_mode>
+                <cgi_url>https://merchant.roboxchange.com/Index.aspx</cgi_url>
             </tmrobokassa>
         </payment>
     </default>

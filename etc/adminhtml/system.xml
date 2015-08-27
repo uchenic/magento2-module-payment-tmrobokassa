@@ -21,6 +21,17 @@
                     <label>New Order Status</label>
                     <source_model>Magento\TMRobokassa\Model\Config\Source\Order\Status\Pendingpayment</source_model>
                 </field>
+                <field id="login" translate="label" type="obscure" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Login ID</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="password" translate="label" type="obscure" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Password</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="merchant" translate="label" type="obscure" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">Merchant ID</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
                 <field id="allowed_carrier" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Allowed Shipping Methods</label>
                     <source_model>Magento\Shipping\Model\Config\Source\Allmethods</source_model>

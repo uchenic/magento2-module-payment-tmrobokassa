@@ -38,7 +38,7 @@ class TMRobokassa extends AbstractMethod
      *
      * @var string
      */
-    protected $_formBlockType = 'Magento\TMRobokassa\Block\Form\TMRobokassaForm';
+    protected $_formBlockType = 'Magento\TMRobokassa\Block\Form\TMRobokassa';
 
     /**
      * Sidebar payment info block
@@ -46,6 +46,10 @@ class TMRobokassa extends AbstractMethod
      * @var string
      */
     protected $_infoBlockType = 'Magento\Payment\Block\Info\Instructions';
+
+    protected $_gateUrl;
+    
+    protected $_testUrl;
 
     /**
      * Get payment instructions text from config
@@ -67,6 +71,8 @@ class TMRobokassa extends AbstractMethod
     public function initialize($paymentAction, $stateObject)
     {
         $state = $this->getConfigData('order_status');
+        $this->_gateUrl=$this->getConfigData('cgi_url');
+        $this->_testUrl=$this->getConfigData('cgi_url_test_mode');
         $stateObject->setState($state);
         $stateObject->setStatus($state);
         $stateObject->setIsNotified(false);
