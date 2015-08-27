@@ -17,7 +17,7 @@ define(
         rendererList.push(
            
             {
-                type: 'banktransfer',
+                type: 'tmrobokassa',
                 component: 'Magento_TMRobokassa/js/view/payment/method-renderer/tmrobokassa-method'
             }
             
