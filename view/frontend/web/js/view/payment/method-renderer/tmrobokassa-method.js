@@ -12,7 +12,7 @@ define(
 
         return Component.extend({
             defaults: {
-                template: 'Magento_TMRobokassa/payment/banktransfer'
+                template: 'Magento_TMRobokassa/payment/tmrobokassa'
             },
             /**
              * Get value of instruction field.
