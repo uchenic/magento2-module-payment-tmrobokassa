@@ -19,7 +19,8 @@ define(
              * @returns {String}
              */
             getInstructions: function () {
-                return window.checkoutConfig.payment.instructions[this.item.method];
+                console.log("try to find instructions:"+this.item.method);
+                //return window.checkoutConfig.payment.instructions[this.item.method];
             }
         });
     }
