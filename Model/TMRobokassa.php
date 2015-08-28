@@ -63,6 +63,12 @@ class TMRobokassa extends AbstractMethod
         return trim($this->getConfigData('instructions'));
     }
 
+
+    public function getAmount(\Magento\Framework\Object $payment)
+    {
+        return $payment->getAmount();
+    }
+
     /**
      * Set order state and status
      *
@@ -107,4 +113,21 @@ class TMRobokassa extends AbstractMethod
     {
         return strpos($this->getConfigData('allowed_carrier'), $shippingMethod) !== false;
     }
+
+
+    public function generateHash(\Magento\Framework\Object $order)
+    {
+        $outSum = $this->getAmount($order);
+        $hashData = array(
+            "MrchLogin" => $this->getConfigData('merchant_id'),
+            "OutSum" => round($outSum, 2),
+            //"InvId" => $order->getId(),
+            "InvId" => $order->getIncrementId(),
+            "pass" => $this->getConfigData('pass_word'),
+        );
+
+        $hash = strtoupper(md5(implode(":", $hashData)));
+        return $hash;
+    }
+
 }

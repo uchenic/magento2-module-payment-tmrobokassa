@@ -1,0 +1,8 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    
+    <body>
+		<referenceContainer name="order.success.additional.info" >
+			<block class="Magento\Framework\View\Element\Template"   template="Magento_TMRobokassa::html/rk.phtml" />
+		</referenceContainer>
+	</body>
+</page>
