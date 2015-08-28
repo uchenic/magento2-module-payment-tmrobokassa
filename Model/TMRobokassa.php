@@ -51,6 +51,8 @@ class TMRobokassa extends AbstractMethod
     
     protected $_testUrl;
 
+    protected $_test;
+
     /**
      * Get payment instructions text from config
      *
@@ -73,6 +75,7 @@ class TMRobokassa extends AbstractMethod
         $state = $this->getConfigData('order_status');
         $this->_gateUrl=$this->getConfigData('cgi_url');
         $this->_testUrl=$this->getConfigData('cgi_url_test_mode');
+        $this->_test=$this->getConfigData('test');
         $stateObject->setState($state);
         $stateObject->setStatus($state);
         $stateObject->setIsNotified(false);
