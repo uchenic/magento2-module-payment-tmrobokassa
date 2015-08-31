@@ -5,10 +5,10 @@ namespace Magento\TMRobokassa\Block;
 /**
  * Abstract class for Cash On Delivery and Bank Transfer payment method form
  */
-use Magento\Framework\View\Element\Template;
+use \Magento\Backend\Block\Widget;
 
 
-abstract class Redirect extends Template
+abstract class Redirect extends Widget
 {
     protected $Config;
 
@@ -33,9 +33,9 @@ abstract class Redirect extends Template
         return $this->Config->getGateUrl();
     }
     
-    public function getChildHtml($name = '', $useCache = true){
-        return "";
-    }
+    // public function getChildHtml($name = '', $useCache = true){
+    //     return "";
+    // }
     // public function getChildHtml($name = '', $useCache = true)
     // {
     //     $payment = $this->getRequest()->getPost('payment');
