@@ -14,7 +14,7 @@ class Redirect extends Template
 
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        Magento\TMRobokassa\Model\TMRobokassa $paymentConfig,
+        \Magento\TMRobokassa\Model\TMRobokassa $paymentConfig,
         array $data = []
     ) {
         parent::__construct($context, $data);
