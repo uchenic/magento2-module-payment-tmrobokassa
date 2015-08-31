@@ -33,7 +33,7 @@ abstract class Redirect extends Template
         return $this->Config->getGateUrl();
     }
     
-    public function getChildHtml(){
+    public function getChildHtml($name = '', $useCache = true){
         return "";
     }
     // public function getChildHtml($name = '', $useCache = true)
