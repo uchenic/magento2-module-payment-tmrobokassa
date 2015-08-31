@@ -103,6 +103,14 @@ class TMRobokassa extends AbstractMethod
         );
     }
 
+    public function getGateUrl(){
+        if($this->_test){
+            return $this->_testUrl;
+        }else{
+            return $this->_gateUrl;
+        }
+    }
+
     /**
      * Check whether payment method can be used with selected shipping method
      *
