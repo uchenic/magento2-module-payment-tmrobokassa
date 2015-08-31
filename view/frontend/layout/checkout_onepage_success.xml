@@ -2,7 +2,7 @@
     
     <body>
 		<referenceContainer name="order.success.additional.info" >
-			<block class="Magento\TMRobokassa\Block\Widget\Redirect"   name="payment.form.redirect" template="Magento_TMRobokassa::html/rk.phtml" />
+			<block class="Magento\TMRobokassa\Block\Widget\Redirect"  />
 		</referenceContainer>
 	</body>
 </page>

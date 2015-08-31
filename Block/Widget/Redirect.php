@@ -1,6 +1,6 @@
 <?php
 
-namespace Magento\TMRobokassa\Block;
+namespace Magento\TMRobokassa\Block\Widget;
 
 /**
  * Abstract class for Cash On Delivery and Bank Transfer payment method form
@@ -8,7 +8,7 @@ namespace Magento\TMRobokassa\Block;
 use \Magento\Backend\Block\Widget;
 
 
-abstract class Redirect extends Widget
+class Redirect extends Widget
 {
     protected $Config;
 
