@@ -32,9 +32,7 @@ abstract class Redirect extends Template
     public function GetGateUrl(){
         return $this->Config->getGateUrl();
     }
-    {
-        # code...
-    }
+   
     // public function getChildHtml($name = '', $useCache = true)
     // {
     //     $payment = $this->getRequest()->getPost('payment');
