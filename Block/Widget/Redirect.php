@@ -29,7 +29,7 @@ class Redirect extends Template
      *
      * @return null|string
      */
-    public function GetGateUrl(){
+    public function getGateUrl(){
         return $this->Config->getGateUrl();
     }
     
