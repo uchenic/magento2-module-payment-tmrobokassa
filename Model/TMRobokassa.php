@@ -67,10 +67,11 @@ class TMRobokassa extends AbstractMethod
 
     public function __construct(
         \Magento\Framework\Model\Context $context,
+        \Magento\Framework\Registry $registry,
         \Magento\Sales\Model\OrderFactory $orderFactory,
         array $data = []){
         $this->orderFactory = $orderFactory;
-        parent::__construct($context);
+        parent::__construct($context,$registry);
     }
 
 
