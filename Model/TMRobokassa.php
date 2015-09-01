@@ -94,7 +94,7 @@ class TMRobokassa extends AbstractMethod
 
 
     //@param \Magento\Framework\Object|\Magento\Payment\Model\InfoInterface $payment
-    public function getAmount()//\Magento\Framework\Object $payment)
+    public function getAmount($orderId)//\Magento\Framework\Object $payment)
     {   //\Magento\Sales\Model\OrderFactory
         $orderFactory=$this->orderFactory;
         /** @var \Magento\Sales\Model\Order $order */
@@ -102,11 +102,11 @@ class TMRobokassa extends AbstractMethod
         // $order->getIncrementId();
         /* @var $order \Magento\Sales\Model\Order */
 
-            //$order = $orderFactory->create()->loadByIncrementId($orderFactory->create()->getIncrementId()-1);
-            //$payment= $order->getPayment();
+            $order = $orderFactory->create()->loadByIncrementId($orderId);
+            $payment= $order->getPayment();
 
-        //return $payment->getAmount();
-        return $orderFactory->create()->getIncrementId();
+        return $payment->getAmount();
+        //return $orderFactory->create()->getRealOrderId();
     }
 
     /**

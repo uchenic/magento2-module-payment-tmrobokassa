@@ -12,14 +12,52 @@ class Redirect extends Template
 {
     protected $Config;
 
+    /**
+     * @var \Magento\Checkout\Model\Session
+     */
+    protected $_checkoutSession;
+
+    /**
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $_customerSession;
+
+    /**
+     * @var \Magento\Sales\Model\OrderFactory
+     */
+    protected $_orderFactory;
+
+    /**
+     * @var \Magento\Sales\Model\Order\Config
+     */
+    protected $_orderConfig;
+
+    /**
+     * @var \Magento\Framework\App\Http\Context
+     */
+    protected $httpContext;
+
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
+        \Magento\Checkout\Model\Session $checkoutSession,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Sales\Model\OrderFactory $orderFactory,
+        \Magento\Sales\Model\Order\Config $orderConfig,
+        \Magento\Framework\App\Http\Context $httpContext,
         \Magento\TMRobokassa\Model\TMRobokassa $paymentConfig,
         array $data = []
     ) {
         parent::__construct($context, $data);
+        $this->_checkoutSession = $checkoutSession;
+        $this->_customerSession = $customerSession;
+        $this->_orderFactory = $orderFactory;
+        $this->_orderConfig = $orderConfig;
+        $this->_isScopePrivate = true;
+        $this->httpContext = $httpContext;
         $this->Config = $paymentConfig;
     }
+
+   
 
 
     protected $_template = 'html/rk.phtml';
@@ -34,8 +72,8 @@ class Redirect extends Template
     }
 
     public function getAmount()
-    {
-        return $this->Config->getAmount();
+    {   $orderId = $this->_checkoutSession->getLastOrderId();
+        return $this->Config->getAmount($orderId);
     }
     
     // public function getChildHtml($name = '', $useCache = true){
