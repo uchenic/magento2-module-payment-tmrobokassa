@@ -1,5 +1,6 @@
 <div class="rk button">
 <form action="<?php echo $block->getGateUrl(); ?>" method="POST">
+	<input type="hidden" name="amm" value="<?php echo $block->getAmount(); ?>"></input>
 	<button type="submit">Pay</button>
 </form>
 

@@ -47,9 +47,9 @@ class TMRobokassa extends AbstractMethod
      */
     protected $_infoBlockType = 'Magento\Payment\Block\Info\Instructions';
 
-    protected $_gateUrl;
+    protected $_gateUrl = "https://merchant.roboxchange.com/Index.aspx";
     
-    protected $_testUrl;
+    protected $_testUrl = "http://test.robokassa.ru/Index.aspx";
 
     protected $_test;
 
@@ -63,9 +63,18 @@ class TMRobokassa extends AbstractMethod
         return trim($this->getConfigData('instructions'));
     }
 
+    //@param \Magento\Framework\Object|\Magento\Payment\Model\InfoInterface $payment
+    public function getAmount()//\Magento\Framework\Object $payment)
+    {   //\Magento\Sales\Model\OrderFactory
+        $orderFactory=new \Magento\Sales\Model\OrderFactory(); //$this->orderFactory;
+        /** @var \Magento\Sales\Model\Order $order */
+        // $order = $payment->getOrder();
+        // $order->getIncrementId();
+        /* @var $order \Magento\Sales\Model\Order */
 
-    public function getAmount(\Magento\Framework\Object $payment)
-    {
+            $order = $orderFactory->create()->loadByIncrementId($orderFactory->create()->getIncrementId()-1);
+            $payment= $order->getPayment();
+
         return $payment->getAmount();
     }
 
