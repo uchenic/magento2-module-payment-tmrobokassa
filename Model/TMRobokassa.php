@@ -87,8 +87,6 @@ class TMRobokassa extends AbstractMethod
             $paymentData,
             $scopeConfig,
             $logger,
-            $moduleList,
-            $localeDate,
             $resource,
             $resourceCollection,
             $data);
@@ -104,10 +102,11 @@ class TMRobokassa extends AbstractMethod
         // $order->getIncrementId();
         /* @var $order \Magento\Sales\Model\Order */
 
-            $order = $orderFactory->create()->loadByIncrementId($orderFactory->create()->getIncrementId()-1);
-            $payment= $order->getPayment();
+            //$order = $orderFactory->create()->loadByIncrementId($orderFactory->create()->getIncrementId()-1);
+            //$payment= $order->getPayment();
 
-        return $payment->getAmount();
+        //return $payment->getAmount();
+        return $orderFactory->create()->getIncrementId();
     }
 
     /**
