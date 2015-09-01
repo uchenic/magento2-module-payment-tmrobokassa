@@ -76,6 +76,8 @@ class TMRobokassa extends AbstractMethod
         \Magento\Framework\Module\ModuleListInterface $moduleList,
         \Magento\Framework\Stdlib\DateTime\TimezoneInterface $localeDate,
         \Magento\Sales\Model\OrderFactory $orderFactory,
+        \Magento\Framework\Model\Resource\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []){
         $this->orderFactory = $orderFactory;
         parent::__construct($context,
@@ -86,7 +88,10 @@ class TMRobokassa extends AbstractMethod
             $scopeConfig,
             $logger,
             $moduleList,
-            $localeDate);
+            $localeDate,
+            $resource,
+            $resourceCollection,
+            $data);
     }
 
 
