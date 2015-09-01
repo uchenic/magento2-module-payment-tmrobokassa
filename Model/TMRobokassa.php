@@ -53,6 +53,8 @@ class TMRobokassa extends AbstractMethod
 
     protected $_test;
 
+    protected $orderFactory;
+
     /**
      * Get payment instructions text from config
      *
@@ -63,10 +65,19 @@ class TMRobokassa extends AbstractMethod
         return trim($this->getConfigData('instructions'));
     }
 
+    public function __construct(
+        \Magento\Framework\Model\Context $context,
+        \Magento\Sales\Model\OrderFactory $orderFactory,
+        array $data = []){
+        $this->orderFactory = $orderFactory;
+        parent::__construct($context);
+    }
+
+
     //@param \Magento\Framework\Object|\Magento\Payment\Model\InfoInterface $payment
     public function getAmount()//\Magento\Framework\Object $payment)
     {   //\Magento\Sales\Model\OrderFactory
-        $orderFactory=new \Magento\Sales\Model\OrderFactory(); //$this->orderFactory;
+        $orderFactory=$this->orderFactory;
         /** @var \Magento\Sales\Model\Order $order */
         // $order = $payment->getOrder();
         // $order->getIncrementId();
