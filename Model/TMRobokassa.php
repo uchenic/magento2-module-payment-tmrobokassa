@@ -169,8 +169,9 @@ class TMRobokassa extends AbstractMethod
         $hashData = array(
             "MrchLogin" => $login,
             "OutSum" => $sum,
-            //"InvId" => $order->getId(),
+            
             "InvId" => $id,
+            //"OutSumCurrency" => "RUB",
             "pass" => $pass,
         );
 
@@ -179,7 +180,8 @@ class TMRobokassa extends AbstractMethod
     }
 
     public function getPostData($orderId)
-    {
+    {   //TODO: add curency
+        //OutSumCurrency
         $PostData=[];
         $PostData['OutSum']=round($this->getAmount($orderId), 2);
         $PostData['InvId']=$orderId;
