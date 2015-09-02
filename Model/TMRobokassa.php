@@ -165,7 +165,7 @@ class TMRobokassa extends AbstractMethod
 
     public function generateHash($login,$sum,$pass,$id=null)
     {
-        $outSum = $this->getAmount($order);
+        
         $hashData = array(
             "MrchLogin" => $login,
             "OutSum" => $sum,
