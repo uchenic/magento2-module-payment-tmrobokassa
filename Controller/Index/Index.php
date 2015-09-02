@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\SampleNewPage\Controller\Index;
+namespace Magento\TMRobokassa\Controller\Index;
 
 /**
  * Responsible for loading page content.
