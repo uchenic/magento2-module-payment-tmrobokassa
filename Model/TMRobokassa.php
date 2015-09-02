@@ -103,10 +103,10 @@ class TMRobokassa extends AbstractMethod
         /* @var $order \Magento\Sales\Model\Order */
 
             $order = $orderFactory->create()->loadByIncrementId($orderId);
-            $payment= $order->getPayment();
+            //$payment= $order->getPayment();
 
-        return $payment->getAmount();
-        //return $orderFactory->create()->getRealOrderId();
+        // return $payment->getAmount();
+        return $order->getGrandTotal();
     }
 
     /**
@@ -163,19 +163,31 @@ class TMRobokassa extends AbstractMethod
     }
 
 
-    public function generateHash(\Magento\Framework\Object $order)
+    public function generateHash($login,$sum,$pass,$id=null)
     {
         $outSum = $this->getAmount($order);
         $hashData = array(
-            "MrchLogin" => $this->getConfigData('merchant_id'),
-            "OutSum" => round($outSum, 2),
+            "MrchLogin" => $login,
+            "OutSum" => $sum,
             //"InvId" => $order->getId(),
-            "InvId" => $order->getIncrementId(),
-            "pass" => $this->getConfigData('pass_word'),
+            "InvId" => $id,
+            "pass" => $pass,
         );
 
         $hash = strtoupper(md5(implode(":", $hashData)));
         return $hash;
+    }
+
+    public function getPostData($orderId)
+    {
+        $PostData=[];
+        $PostData['OutSum']=round($this->getAmount($orderId), 2);
+        $PostData['InvId']=$orderId;
+        $PostData['MerchantLogin']=$this->getConfigData('merchant_id');
+        $PostData['Description']="Test payment";
+        $PostData['SignatureValue']=$this->generateHash($PostData['MerchantLogin'],$PostData['OutSum'],$this->getConfigData('pass_word'),$orderId);
+        return $PostData;
+
     }
 
 }

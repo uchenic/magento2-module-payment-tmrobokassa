@@ -1,6 +1,8 @@
 <div class="rk button">
 <form action="<?php echo $block->getGateUrl(); ?>" method="POST">
-	<input type="hidden" name="amm" value="<?php echo $block->getAmount(); ?>"></input>
+<?php foreach($block->getPostData() as $key=>$value): ?>
+	<input type="hidden" name="<?php echo $key; ?>" value="<?php echo $value; ?>"></input>
+<?php endforeach; ?>
 	<button type="submit">Pay</button>
 </form>
 

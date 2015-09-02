@@ -76,9 +76,20 @@ class Redirect extends Template
         if ($orderId) {
             $incrementId = $this->_checkoutSession->getLastRealOrderId();
 
-        return $this->Config->getAmount($orderId);
+        return $this->Config->getAmount($incrementId);
     }
     }
+
+    public function getPostData()
+    {
+        $orderId = $this->_checkoutSession->getLastOrderId(); 
+        if ($orderId) {
+            $incrementId = $this->_checkoutSession->getLastRealOrderId();
+
+        return $this->Config->getPostData($incrementId);
+    }
+    }
+
     
     // public function getChildHtml($name = '', $useCache = true){
     //     return "";
