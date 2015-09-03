@@ -187,9 +187,83 @@ class TMRobokassa extends AbstractMethod
         $PostData['InvId']=$orderId;
         $PostData['MerchantLogin']=$this->getConfigData('merchant_id');
         $PostData['Description']="Test payment";
-        $PostData['SignatureValue']=$this->generateHash($PostData['MerchantLogin'],$PostData['OutSum'],$this->getConfigData('pass_word'),$orderId);
+        $PostData['SignatureValue']=$this->generateHash($PostData['MerchantLogin'],
+            $PostData['OutSum'],$this->getConfigData('pass_word'),$orderId);
         return $PostData;
 
+    }
+
+    public function process($responseData)
+    {
+        // $debugData = ['response' => $responseData];
+        // $this->_debug($debugData);
+
+        // $this->mapGatewayResponse($responseData, $this->getResponse());
+        // $order = $this->_getOrderFromResponse();
+        // if ($order) {
+        //     $this->_processOrder($order);
+        // }
+        echo "Ok";
+    }
+
+    protected function _processOrder(\Magento\Sales\Model\Order $order)
+    {
+        $response = $this->getResponse();
+        $payment = $order->getPayment();
+        $payment->setTransactionId($response->getPnref())->setIsTransactionClosed(0);
+        $canSendNewOrderEmail = true;
+
+        if ($response->getResult() == self::RESPONSE_CODE_FRAUDSERVICE_FILTER ||
+            $response->getResult() == self::RESPONSE_CODE_DECLINED_BY_FILTER
+        ) {
+            $canSendNewOrderEmail = false;
+
+            $payment->setIsTransactionPending(
+                true
+            )->setIsFraudDetected(
+                true
+            );
+
+            $fraudMessage = $response->getData('respmsg');
+            if ($response->getData('fps_prexmldata')) {
+                $xml = new \SimpleXMLElement($response->getData('fps_prexmldata'));
+                $fraudMessage = (string)$xml->rule->triggeredMessage;
+            }
+            $payment->setAdditionalInformation(
+                Info::PAYPAL_FRAUD_FILTERS,
+                $fraudMessage
+            );
+        }
+
+        if ($response->getData('avsdata') && strstr(substr($response->getData('avsdata'), 0, 2), 'N')) {
+            $payment->setAdditionalInformation(Info::PAYPAL_AVS_CODE, substr($response->getData('avsdata'), 0, 2));
+        }
+
+        if ($response->getData('cvv2match') && $response->getData('cvv2match') != 'Y') {
+            $payment->setAdditionalInformation(Info::PAYPAL_CVV_2_MATCH, $response->getData('cvv2match'));
+        }
+
+        switch ($response->getType()) {
+            case self::TRXTYPE_AUTH_ONLY:
+                $payment->registerAuthorizationNotification($payment->getBaseAmountAuthorized());
+                break;
+            case self::TRXTYPE_SALE:
+                $payment->registerCaptureNotification($payment->getBaseAmountAuthorized());
+                break;
+            default:
+                break;
+        }
+        $order->save();
+
+        try {
+            if ($canSendNewOrderEmail) {
+                $this->orderSender->send($order);
+            }
+            $quote = $this->quoteRepository->get($order->getQuoteId())->setIsActive(false);
+            $this->quoteRepository->save($quote);
+        } catch (\Exception $e) {
+            throw new \Magento\Framework\Exception\LocalizedException(__('We cannot send the new order email.'));
+        }
     }
 
 }

@@ -30,7 +30,14 @@ class Index extends \Magento\Framework\App\Action\Action
      * @return \Magento\Framework\View\Result\Page
      */
     public function execute()
-    {
-        return $this->resultPageFactory->create();
+    {   //load model
+        /* @var $paymentMethod \Magento\Authorizenet\Model\DirectPost */
+        $paymentMethod = $this->_objectManager->create('Magento\TMRobokassa\Model\TMRobokassa');
+
+        //get request data
+        $data = $this->getRequest()->getPostValue();
+
+        $paymentMethod->process($data);
+        //return $this->resultPageFactory->create();
     }
 }
