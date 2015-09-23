@@ -261,7 +261,7 @@ class TMRobokassa extends AbstractMethod
             // }
 
             if ($outSum != $answer["OutSum"]) {
-                $errors[] = "Incorrect Amount: " . $answer["OutSum"] . " (need: " . $outSum . ")";
+                $errors[] = "Incorrect Amount: " . $response["OutSum"] . " (need: " . $outSum . ")";
             }
 
             // if (count($errors) > 0) {
