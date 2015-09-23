@@ -270,7 +270,7 @@ class TMRobokassa extends AbstractMethod
 
             //return (bool)$correctHash;
             //$payment->registerCaptureNotification($payment->getBaseAmountAuthorized());
-            if ($correctHash) {
+            if (!$correctHash) {
                 $payment->setTransactionId($response["InvId"])->setIsTransactionClosed(0);
                 $order->setStatus(Order::STATE_PAYMENT_REVIEW);
                 $order->save();
