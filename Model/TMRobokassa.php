@@ -7,6 +7,8 @@ namespace Magento\TMRobokassa\Model;
 
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Payment\Model\Method\AbstractMethod;
+use Magento\TMRobokassa\Model\Config\Source\Order\Status\Paymentreview;
+use Magento\Sales\Model\Order;
 
 
 /**
@@ -266,6 +268,7 @@ class TMRobokassa extends AbstractMethod
             //$payment->registerCaptureNotification($payment->getBaseAmountAuthorized());
             if ($correctHash) {
                 $payment->setTransactionId($response["InvId"])->setIsTransactionClosed(0);
+                $order->setStatus(Order::STATE_PAYMENT_REVIEW);
                 $order->save();
                 echo "Ok".$response["InvId"]; 
             }
