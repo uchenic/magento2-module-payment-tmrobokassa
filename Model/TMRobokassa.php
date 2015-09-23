@@ -230,7 +230,7 @@ class TMRobokassa extends AbstractMethod
             $hashArray = array(
                 $response["OutSum"],
                 $response["InvId"],
-                $this->_sMerchantPassTwo
+                $this->getConfigData('pass_word_2')
             );
 
             $hashCurrent = strtoupper(md5(implode(":", $hashArray)));
