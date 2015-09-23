@@ -260,7 +260,7 @@ class TMRobokassa extends AbstractMethod
                 $outSum = round($order->getGrandTotal(), 2);
             // }
 
-            if ($outSum != $answer["OutSum"]) {
+            if ($outSum != $response["OutSum"]) {
                 $errors[] = "Incorrect Amount: " . $response["OutSum"] . " (need: " . $outSum . ")";
             }
 
