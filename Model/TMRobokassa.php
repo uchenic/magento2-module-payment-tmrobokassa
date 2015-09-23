@@ -244,7 +244,7 @@ class TMRobokassa extends AbstractMethod
 
             if (!$correctHash) {
                 $errors[] = "Incorrect HASH (need:" . $hashCurrent . ", got:"
-                    . strtoupper($answer['SignatureValue']) . ") - fraud data or wrong secret Key";
+                    . strtoupper($response['SignatureValue']) . ") - fraud data or wrong secret Key";
                 $errors[] = "Maybe success payment";
             }
 
