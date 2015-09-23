@@ -214,7 +214,7 @@ class TMRobokassa extends AbstractMethod
 
 
         if ($order) {
-            $this->_processOrder($order,$responseData);
+            echo $this->_processOrder($order,$responseData);
         }
         }else{
             echo "errors";
@@ -274,7 +274,7 @@ class TMRobokassa extends AbstractMethod
                 $payment->setTransactionId($response["InvId"])->setIsTransactionClosed(0);
                 $order->setStatus(Order::STATE_PAYMENT_REVIEW);
                 $order->save();
-                echo "Ok".$response["InvId"]; 
+                return "Ok".$response["InvId"]; 
             }
             
             //  
