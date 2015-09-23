@@ -195,7 +195,7 @@ class TMRobokassa extends AbstractMethod
         $PostData['MerchantLogin']=$this->getConfigData('merchant_id');
         $PostData['Description']="Test payment";
         $PostData['SignatureValue']=$this->generateHash($PostData['MerchantLogin'],
-            $PostData['OutSum'],$this->getConfigData('pass_word'),$orderId);
+            $PostData['OutSum'],$this->getConfigData('pass_word_1'),$orderId);
         return $PostData;
 
     }
@@ -222,9 +222,60 @@ class TMRobokassa extends AbstractMethod
         //$payment->setTransactionId($response->getPnref())->setIsTransactionClosed(0);
         //TODO: add validation for request data
 
-        $payment->registerCaptureNotification($payment->getBaseAmountAuthorized());
-        $order->save();
-        //echo "Ok";      
+         try {
+            $errors = array();
+            //$this->readConfig();
+            //$order = Mage::getModel("sales/order")->load($this->getOrderId($answer));
+            //$order = Mage::getModel("sales/order")->loadByIncrementId($this->getOrderId($answer));
+            $hashArray = array(
+                $response["OutSum"],
+                $response["InvId"],
+                $this->_sMerchantPassTwo
+            );
+
+            $hashCurrent = strtoupper(md5(implode(":", $hashArray)));
+            $correctHash = (strcmp($hashCurrent, strtoupper($response['SignatureValue'])) == 0);
+
+            if (!$correctHash) {
+                $errors[] = "Incorrect HASH (need:" . $hashCurrent . ", got:"
+                    . strtoupper($answer['SignatureValue']) . ") - fraud data or wrong secret Key";
+                $errors[] = "Maybe success payment";
+            }
+
+            /**
+             * @var $order Mage_Sales_Model_Order
+             */
+            // if ($this->_transferCurrency != $order->getOrderCurrencyCode()) {
+            //     $outSum = round(
+            //         $order->getBaseCurrency()->convert($order->getBaseGrandTotal(), $this->_transferCurrency),
+            //         2
+            //     );
+            // } else {
+                $outSum = round($order->getGrandTotal(), 2);
+            // }
+
+            if ($outSum != $answer["OutSum"]) {
+                $errors[] = "Incorrect Amount: " . $answer["OutSum"] . " (need: " . $outSum . ")";
+            }
+
+            // if (count($errors) > 0) {
+            //     return $errors;
+            // }
+
+            //return (bool)$correctHash;
+            //$payment->registerCaptureNotification($payment->getBaseAmountAuthorized());
+            if ($correctHash) {
+                $payment->setTransactionId($response["InvId"])->setIsTransactionClosed(0);
+                $order->save();
+                echo "Ok".$response["InvId"]; 
+            }
+            
+            //  
+        } catch (Exception $e) {
+            return array("Internal error:" . $e->getMessage());
+        }
+
+          
     }
 
 }
