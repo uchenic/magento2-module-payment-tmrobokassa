@@ -208,13 +208,17 @@ class TMRobokassa extends AbstractMethod
         $this->_debug($debugData);
 
         // $this->mapGatewayResponse($responseData, $this->getResponse());
+        if(count($responseData)>2){
          $order = $this->getOrder($responseData['InvId']);
+        
 
 
         if ($order) {
             $this->_processOrder($order,$responseData);
         }
-        
+        }else{
+            echo "errors";
+        }
     }
 
     protected function _processOrder(\Magento\Sales\Model\Order $order , $response)
