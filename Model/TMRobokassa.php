@@ -195,7 +195,7 @@ class TMRobokassa extends AbstractMethod
         $PostData['OutSum']=round($this->getAmount($orderId), 2);
         $PostData['InvId']=intval($orderId);
         $PostData['MerchantLogin']=$this->getConfigData('merchant_id');
-        $PostData['Description']="Test payment";
+        $PostData['Description']="payment for order ".$orderId;
         $PostData['SignatureValue']=$this->generateHash($PostData['MerchantLogin'],
             $PostData['OutSum'],$this->getConfigData('pass_word_1'),$PostData['InvId']);
         return $PostData;
