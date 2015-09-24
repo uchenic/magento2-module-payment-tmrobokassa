@@ -153,7 +153,7 @@ class TMRobokassa extends AbstractMethod
     }
 
     public function getGateUrl(){
-        if($this->_test){
+        if($this->getConfigData('test')){
             return $this->_testUrl;
         }else{
             return $this->_gateUrl;
