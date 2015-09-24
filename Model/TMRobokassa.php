@@ -193,11 +193,11 @@ class TMRobokassa extends AbstractMethod
         //OutSumCurrency
         $PostData=[];
         $PostData['OutSum']=round($this->getAmount($orderId), 2);
-        $PostData['InvId']=$orderId;
+        $PostData['InvId']=intval($orderId);
         $PostData['MerchantLogin']=$this->getConfigData('merchant_id');
         $PostData['Description']="Test payment";
         $PostData['SignatureValue']=$this->generateHash($PostData['MerchantLogin'],
-            $PostData['OutSum'],$this->getConfigData('pass_word_1'),$orderId);
+            $PostData['OutSum'],$this->getConfigData('pass_word_1'),$PostData['InvId']);
         return $PostData;
 
     }
@@ -209,7 +209,7 @@ class TMRobokassa extends AbstractMethod
 
         // $this->mapGatewayResponse($responseData, $this->getResponse());
         if(count($responseData)>2){
-         $order = $this->getOrder($responseData['InvId']);
+         $order = $this->getOrder(sprintf("%010s",$responseData['InvId']));
         
 
 
