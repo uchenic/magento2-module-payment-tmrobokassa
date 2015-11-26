@@ -142,7 +142,7 @@ class TMRobokassa extends AbstractMethod
      * @param CartInterface|null $quote
      * @return bool
      */
-    public function isAvailable($quote = null)
+    public function isAvailable(\Magento\Quote\Api\Data\CartInterface $quote = null)
     {
         if ($quote === null) {
             return false;
